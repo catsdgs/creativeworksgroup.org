@@ -12,7 +12,7 @@
     <!-- Bootstrap core CSS -->
     <link href="bootstrap.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this website -->
     <link href="scrolling-nav.css" rel="stylesheet">
 
   </head>
@@ -30,6 +30,9 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#products">Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#locations">Locations</a>
@@ -56,7 +59,7 @@
             <h2>About us</h2>
             <p class="lead"></p>
             <ul>
-              <li>Clickable nav links that smooth scroll to page sections</li>
+              <li>We make DIY products</li>
               <li>Responsive behavior when clicking nav links perfect for a one page website</li>
               <li>Bootstrap's scrollspy feature which highlightstions which section of the page you're on in the navbar</li>
               <li>Minimal custom CSS so you are free to explore your own unique design options</li>
@@ -109,10 +112,19 @@ ipsa exercitationem, in, quo totam.</p>
     <!-- Plugin JavaScript -->
     <script src="jquery.js"></script>
 
-    <!-- Custom JavaScript for this theme -->
+    <!-- Custom JavaScript for this website -->
     <script src="scrolling-nav.js"></script>
 
-  
+  <!-- Other Scripts -->
+<script type="text/javascript">
+$(document).ready(function() {
+    var url = window.location.href;
+    var modalToOpen = url.substring(url.indexOf("#"));
+    if(window.location.href.indexOf(modalToOpen) != -1) {
+        $(modalToOpen).modal("show");
+    }
+});	    
+</script> 
 
 
 </body></html>
