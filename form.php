@@ -34,9 +34,9 @@ else
         $message = wordwrap($message, 70, "\r\n");
         // Send Mail By PHP Mail Function
         if (mail($to, $subject, $message, $headers)) {
-            header("Location: https://google.com");;
+            echo "Message Sent"; #this is correct one
         } else {
-            echo "Failed to send email, try again.";
+            header("Location: https://google.com");
             exit ;
         }
     }
