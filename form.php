@@ -6,9 +6,8 @@
   // Check for correct reCAPTCHA
     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LdvhUUUAAAAAGfcqknpX0WbWyVgbzRFPp-pn4ct&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']);
     if (!$captcha || $response.success == false) {
-       <script type="text/javascript">
-  window.location.href='https://google.com';
-        </script>
+        ob_start();
+        header('Location: index.html');
         exit ;
       } else {
         // Check for Blank Fields..
