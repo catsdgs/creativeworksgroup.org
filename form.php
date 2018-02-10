@@ -12,6 +12,7 @@
         // Check for Blank Fields..
         if ($_POST["vname"] == "" || $_POST["vemail"] == "" || $_POST["msg"] == "") {
     echo "Please fill all required fields";
+else
 } else {
     // Check if the "Sender's Email" input field is filled out
     $email = $_POST['vemail'];
@@ -33,7 +34,7 @@
         $message = wordwrap($message, 70, "\r\n");
         // Send Mail By PHP Mail Function
         if (mail($to, $subject, $message, $headers)) {
-            echo "Your mail has been sent successfully!";
+            header("Location: https://google.com");;
         } else {
             echo "Failed to send email, try again.";
             exit ;
