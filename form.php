@@ -24,7 +24,7 @@ else
     if (!$email) {
         echo "Invalid Sender's Email";
     } else {
-        $to = 'therealcatsdgs@gmail.com';
+        $to = '';
         $subject = 'New Form Entry';
         $message = "New message was submitted from <br /> " . "<strong>" . $_POST['vname'] . "</strong>" . "<br /><br />The message is:<br />" . "<strong>" . $_POST['msg'] . "</strong>";
         $headers = "From:" . $_POST['vname'] . "<" . $email . ">";
