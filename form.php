@@ -1,15 +1,14 @@
 <?php
-	if (isset($_POST["submit"])) {
-		$name = $_POST['name'];
-		$email = $_POST['email'];
-		$message = $_POST['message'];
 	require_once('recaptchalib.php');
   $privatekey = "6LdvhUUUAAAAAGfcqknpX0WbWyVgbzRFPp-pn4ct";
   $resp = recaptcha_check_answer ($privatekey,
                                 $_SERVER["REMOTE_ADDR"],
                                 $_POST["recaptcha_challenge_field"],
                                 $_POST["recaptcha_response_field"]);
-
+	if (isset($_POST["submit"])) {
+		$name = $_POST['name'];
+		$email = $_POST['email'];
+		$message = $_POST['message'];
 		$from = 'Demo Contact Form'; 
 		$to = 'therealcatsdgs@gmail.com'; 
 		$subject = 'Message from Contact Demo ';
