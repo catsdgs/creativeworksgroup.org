@@ -97,16 +97,11 @@ Contact Form
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-<form method="post" action="form.php">
-  <label>Your Name (required):</label>
-    <input name="name" type="text" placeholder="Enter your name here">
-  <label>Email Address (required):</label>
-    <input name="email" type="email" placeholder="Enter your email address here">
-  <label>Your Message (required):</label>
-    <textarea name="message" placeholder="Write your message here"></textarea>
-  <div style="margin-top:20px;" class="g-recaptcha" data-sitekey="6LdvhUUUAAAAAF1wEgnuzYuhLQ98nvYYSwSMlMp-"></div>
-      </div>
+<form action="" method="POST">
+    <input type="text" name="name" value="" />
+    <input type="text" name="email" value="" />
+    <textarea type="text" name="message"></textarea>
+    <div class="g-recaptcha" data-sitekey="6LdvhUUUAAAAAF1wEgnuzYuhLQ98nvYYSwSMlMp-"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> <button type="submit" class="btn btn-primary">Submit</button>
       </form>
