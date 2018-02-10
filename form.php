@@ -1,10 +1,17 @@
 <?php
-	require_once('recaptchalib.php');
-  $privatekey = "6LdvhUUUAAAAAGfcqknpX0WbWyVgbzRFPp-pn4ct";
-  $resp = recaptcha_check_answer ($privatekey,
-                                $_SERVER["REMOTE_ADDR"],
-                                $_POST["recaptcha_challenge_field"],
-                                $_POST["recaptcha_response_field"]);
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, [
+    'secret' => $privatekey,
+    'response' => $_POST['g-recaptcha-response'],
+    'remoteip' => $_SERVER['REMOTE_ADDR']
+]);
+
+$resp = json_decode(curl_exec($ch));
+curl_close($ch);
 	if (isset($_POST["submit"])) {
 		$name = $_POST['name'];
 		$email = $_POST['email'];
@@ -29,8 +36,11 @@
 		if (!$_POST['message']) {
 			$errMessage = 'Please enter your message';
 		}
-                if (!$resp->is_valid) {
-                        $errMessage = 'Please complete captcha';
+
+                if ($resp->success) {
+                 } else {
+                $errMessage = 'Please complete the captcha';
+                }
 		}
 // If there are no errors, send the email
 if (!$errName && !$errEmail && !$errMessage && !$errReCaptcha) {
