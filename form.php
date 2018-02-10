@@ -6,7 +6,7 @@
   // Check for correct reCAPTCHA
     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LdvhUUUAAAAAGfcqknpX0WbWyVgbzRFPp-pn4ct&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']);
     if (!$captcha || $response.success == false) {
-         header( "Location: http://amazon.com" )
+         header( "Location: http://amazon.com" );
         exit ;
       } else {
         // Check for Blank Fields..
@@ -35,8 +35,9 @@ else
         // Send Mail By PHP Mail Function
         if (mail($to, $subject, $message, $headers)) {
             echo "Message Sent"; #this is correct one
+            exit ;
         } else {
-            header( "Location: http://google.com" )
+            header( "Location: http://google.com" );
             exit ;
         }
     }
