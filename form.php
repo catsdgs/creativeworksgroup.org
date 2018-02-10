@@ -36,7 +36,7 @@ else
         if (mail($to, $subject, $message, $headers)) {
             echo "Message Sent"; #this is correct one
         } else {
-            header("Location: https://google.com");
+            header( "Location: http://google.com" )
             exit ;
         }
     }
