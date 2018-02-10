@@ -3,9 +3,15 @@
 		$name = $_POST['name'];
 		$email = $_POST['email'];
 		$message = $_POST['message'];
-		$human = intval($_POST['human']);
+	require_once('recaptchalib.php');
+  $privatekey = "6LdvhUUUAAAAAGfcqknpX0WbWyVgbzRFPp-pn4ct";
+  $resp = recaptcha_check_answer ($privatekey,
+                                $_SERVER["REMOTE_ADDR"],
+                                $_POST["recaptcha_challenge_field"],
+                                $_POST["recaptcha_response_field"]);
+
 		$from = 'Demo Contact Form'; 
-		$to = 'example@bootstrapbay.com'; 
+		$to = 'therealcatsdgs@gmail.com'; 
 		$subject = 'Message from Contact Demo ';
 		
 		$body = "From: $name\n E-Mail: $email\n Message:\n $message";
@@ -24,13 +30,11 @@
 		if (!$_POST['message']) {
 			$errMessage = 'Please enter your message';
 		}
-		//Check if simple anti-bot test is correct
-		if ($human !== 5) {
-			$errHuman = 'Your anti-spam is incorrect';
+                if (!$resp->is_valid) {
+                        $errMessage = 'Please complete captcha';
 		}
- 
 // If there are no errors, send the email
-if (!$errName && !$errEmail && !$errMessage && !$errHuman) {
+if (!$errName && !$errEmail && !$errMessage && !$errReCaptcha) {
 	if (mail ($to, $subject, $body, $from)) {
 		$result='<div class="alert alert-success">Thank You! I will be in touch</div>';
 	} else {
