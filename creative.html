@@ -97,13 +97,26 @@ Contact Form
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-<form action="form.php" method="POST">
-    <input type="text" name="name" value="" />
-    <input type="text" name="email" value="" />
-    <textarea type="text" name="message"></textarea>
-    <div class="g-recaptcha" data-sitekey="6LdvhUUUAAAAAF1wEgnuzYuhLQ98nvYYSwSMlMp-"></div>
+<form id="contactform" action="form.php#contact" method="post" class="form" role="form">
+
+    <div class="form-group">
+      <input class="form-control required" id="vname" name="vname" placeholder="Your Name" type="text" required />
+    </div>
+
+    <div class="form-group">
+      <input class="form-control required" id="vemail" name="vemail" placeholder="Your Email" type="email" required />
+    </div>
+
+    <div class="form-group">
+      <textarea class="form-control required" id="msg" name="msg" placeholder="Your Message" rows="7" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <div class="g-recaptcha" data-sitekey="6LdvhUUUAAAAAF1wEgnuzYuhLQ98nvYYSwSMlMp-"></div>
+    </div>
+ 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> <button type="submit" class="btn btn-success form-send">Submit</button>
       </form>
 	      </div>
     </div>
