@@ -36,7 +36,7 @@ if(isset($_POST['submit']) && !empty($_POST['submit'])):
         $errMsg = 'Please click on the reCAPTCHA box.';
     endif;
 else:
-    $errMsg = '';
-    $succMsg = '';
+    $errMsg = 'Form not sent.';
+    $succMsg = 'Your contact request have submitted successfully.';
 endif;
 ?>
