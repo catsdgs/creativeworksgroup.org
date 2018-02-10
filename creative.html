@@ -117,11 +117,6 @@ Contact Form
 			<textarea class="form-control" rows="4" name="message"></textarea>
 		</div>
 	</div>
-        <?php
-          require_once('recaptchalib.php');
-          $publickey = "6LdvhUUUAAAAAF1wEgnuzYuhLQ98nvYYSwSMlMp-"; // you got this from the signup page
-          echo recaptcha_get_html($publickey);
-        ?>
 
 	<div class="form-group">
 		<div class="col-sm-10 col-sm-offset-2">
