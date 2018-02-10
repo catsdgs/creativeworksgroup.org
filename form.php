@@ -6,7 +6,9 @@
   // Check for correct reCAPTCHA
     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LdvhUUUAAAAAGfcqknpX0WbWyVgbzRFPp-pn4ct&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']);
     if (!$captcha || $response.success == false) {
-        header('Refresh: 5;URL=http://www.google.com/');
+       <script type="text/javascript">
+  window.location.href='https://google.com';
+        </script>
         exit ;
       } else {
         // Check for Blank Fields..
@@ -37,7 +39,7 @@ else
             echo "Message Sent"; #this is correct one
             exit ;
         } else {
-            header('Refresh: 5;URL=http://www.google.com/');
+            echo "Message not sent"; #this is false one
             exit ;
         }
     }
