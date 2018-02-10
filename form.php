@@ -37,7 +37,12 @@ else
             echo "Message Sent"; #this is correct one
             exit ;
         } else {
-            header( "Location: http://google.com" );
+           <script type="text/javascript">
+// javascript refresh
+window.setTimeout(function(){
+    location.href="http://www.google.com";
+},5000);
+</script>
             exit ;
         }
     }
