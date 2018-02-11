@@ -1,47 +1,42 @@
-
-
 <?php
-  $captcha;
-    if (isset($_POST['g-recaptcha-response'])) { $captcha = $_POST['g-recaptcha-response']; }
-  // Check for correct reCAPTCHA
-    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LdvhUUUAAAAAGfcqknpX0WbWyVgbzRFPp-pn4ct&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']);
-    if (!$captcha || $response.success == false) {
-        ob_start();
-        header('Location: index.html');
-        exit ;
-      } else {
-        // Check for Blank Fields..
-        if ($_POST["vname"] == "" || $_POST["vemail"] == "" || $_POST["msg"] == "") {
-    echo "Please fill all required fields";
-else
-} else {
-    // Check if the "Sender's Email" input field is filled out
-    $email = $_POST['vemail'];
-    // Sanitize E-mail Address
-    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    // Validate E-mail Address
-    $email = filter_var($email, FILTER_VALIDATE_EMAIL);
-    if (!$email) {
-        echo "Invalid Sender's Email";
-    } else {
-        $to = '';
-        $subject = 'New Form Entry';
-        $message = "New message was submitted from <br /> " . "<strong>" . $_POST['vname'] . "</strong>" . "<br /><br />The message is:<br />" . "<strong>" . $_POST['msg'] . "</strong>";
-        $headers = "From:" . $_POST['vname'] . "<" . $email . ">";
-        $headers .= "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        // Sender's Email
-        // Message lines should not exceed 70 characters (PHP rule), so wrap it
-        $message = wordwrap($message, 70, "\r\n");
-        // Send Mail By PHP Mail Function
-        if (mail($to, $subject, $message, $headers)) {
-            echo "Message Sent"; #this is correct one
-            exit ;
-        } else {
-            echo "Message not sent"; #this is false one
-            exit ;
-        }
-    }
-}
-}
+if(isset($_POST['submit']) && !empty($_POST['submit'])):
+    if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])):
+        //your site secret key
+        $secret = '9LuDh9kyetYYYYdT0jsVckScsH8Ks3KA';
+        //get verify response data
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+        $responseData = json_decode($verifyResponse);
+        if($responseData->success):
+            //contact form submission code
+            $name = !empty($_POST['name'])?$_POST['name']:'';
+            $email = !empty($_POST['email'])?$_POST['email']:'';
+            $message = !empty($_POST['message'])?$_POST['message']:'';
+            
+            $to = 'contact@codexworld.com';
+            $subject = 'New contact form have been submitted';
+            $htmlContent = "
+                <h1>Contact request details</h1>
+                <p><b>Name: </b>".$name."</p>
+                <p><b>Email: </b>".$email."</p>
+                <p><b>Message: </b>".$message."</p>
+            ";
+            // Always set content-type when sending HTML email
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            // More headers
+            $headers .= 'From:'.$name.' <'.$email.'>' . "\r\n";
+            //send email
+            @mail($to,$subject,$htmlContent,$headers);
+            
+            $succMsg = 'Your contact request have submitted successfully.';
+        else:
+            $errMsg = 'Robot verification failed, please try again.';
+        endif;
+    else:
+        $errMsg = 'Please click on the reCAPTCHA box.';
+    endif;
+else:
+    $errMsg = '';
+    $succMsg = '';
+endif;
 ?>
